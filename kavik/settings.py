@@ -11,20 +11,13 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_SETTINGS_DIRECTORY = os.path.dirname(globals()['__file__'])
+PROJECT_ROOT_DIRECTORY = os.path.join(PROJECT_SETTINGS_DIRECTORY, '..', '..')
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(d1&43pqxnmr+1bn9%%a5ccdux33@5hs#v#238a^0zqiy^)lwj'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,20 +47,14 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'theme/'),
 )
 
+SECRET_KEY = "1"
+
 ROOT_URLCONF = 'kavik.urls'
 
 WSGI_APPLICATION = 'kavik.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
@@ -87,3 +74,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from kavik.local_settings import *
+except ImportError as e:
+    print(e)
+    pass
