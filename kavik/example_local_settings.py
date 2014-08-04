@@ -1,5 +1,5 @@
 import os
-from base import PROJECT_ROOT_DIRECTORY
+from kavik.settings import BASE_DIR
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,7 +19,7 @@ DATABASES = {
 }
 
 EMAIL_HOST = "localhost"
-DEFAULT_FROM_EMAIL = "no-reply@dfektlan.no"
+DEFAULT_FROM_EMAIL = "no-reply@klatrerosen.no"
 REGISTER_FROM_MAIL = DEFAULT_FROM_EMAIL
 EMAIL_PORT = 25
 #EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
