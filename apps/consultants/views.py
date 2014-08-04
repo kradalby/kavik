@@ -15,8 +15,7 @@ def basic_http_auth(f):
     def wrap(request, *args, **kwargs):
         if request.META.get('HTTP_AUTHORIZATION', False):
             authtype, auth = request.META['HTTP_AUTHORIZATION'].split(' ')
-            auth = base64.b64decode(auth)
-            print(auth)
+            auth = base64.b64decode(bytes(auth, 'utf-8'))
             # username, password = auth.split(':')
             # if username == 'test' and password == 'test':
             if auth == b'test:test':
