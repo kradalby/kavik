@@ -58,7 +58,7 @@ def vcf(request):
         uid = uuid.uuid5(uuid.NAMESPACE_DNS, c.number).__str__().upper()
         rev = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ') 
         vcf += """BEGIN:VCARD
-VERSIOqN:3.0
+VERSION:3.0
 N:%s;%s
 FN:%s %s
 ORG:%s
