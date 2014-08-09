@@ -8,6 +8,8 @@ from django.http import HttpResponse
 
 from apps.consultants.models import Consultant
 
+from kavik.settings import BASIC_USER, BASIC_PASS
+
 # Create your views here.
 
 # Basic auth decorator for some security layer.
@@ -18,7 +20,8 @@ def basic_http_auth(f):
             auth = base64.b64decode(bytes(auth, 'utf-8'))
             # username, password = auth.split(':')
             # if username == 'test' and password == 'test':
-            if auth == b'test:test':
+            a = '%s:%s' % (BASIC_USER, BASIC_PASS)
+            if auth == bytes(a, 'utf-8'):
                 return f(request, *args, **kwargs)
             else:
                 r = HttpResponse("Auth Required", status = 401)
@@ -33,7 +36,7 @@ def basic_http_auth(f):
 
 @basic_http_auth
 def maillist(request, team_id=None):
-    if team_id.isnumeric():
+    if team_id and team_id.isnumeric():
         consultants = Consultant.objects.filter(team=team_id)
         text = generateMailList(consultants)
         return HttpResponse(text, content_type='text/plain')
