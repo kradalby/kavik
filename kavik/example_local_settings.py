@@ -18,6 +18,10 @@ DATABASES = {
     }
 }
 
+# Basic auth user/pass
+BASIC_USER = ""
+BASIC_PASS = ""
+
 EMAIL_HOST = "localhost"
 DEFAULT_FROM_EMAIL = "no-reply@klatrerosen.no"
 REGISTER_FROM_MAIL = DEFAULT_FROM_EMAIL
