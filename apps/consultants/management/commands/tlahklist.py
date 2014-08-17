@@ -11,6 +11,6 @@ class Command(BaseCommand):
         tl = Consultant.objects.filter(number__endswith='01')
         string = "Teams = "
         for t in tl:
-            string += t.number[:2] + " "
-        print(string)
+            string += t.number[:2] + ","
+        print(string[:-1])
         
