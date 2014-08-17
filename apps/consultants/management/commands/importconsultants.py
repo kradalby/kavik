@@ -24,6 +24,7 @@ class Command(BaseCommand):
             unique_tupo = [x[0] for x in consultants]
             unique_django = [x.longUniqueTWNumber for x in Consultant.objects.all()]
             not_active = [x for x in unique_django if x not in unique_tupo]
+            new = [x for x in unique_tupo if x not in unique_django]
           
            
             for c in consultants:
@@ -50,13 +51,17 @@ class Command(BaseCommand):
                     "active"             :  True,
                 })
                 # cons.save()
+                if c[0] in new:
+                    print("%s - %s %s added" % (cons.number, cons.firstName, cons.lastName))
             
             # Set removed consultants to unactive
 
             for c in not_active:
                 cons = Consultant.objects.get(longUniqueTWNumber=c)
-                cons.active = False
-                cons.save()
+                if cons.active:
+                    cons.active = False
+                    cons.save()
+                    print("%s - %s %s is now inactive" % (cons.number, cons.firstName, cons.lastName))
 
 
         except Exception as e:

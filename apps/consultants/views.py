@@ -37,17 +37,17 @@ def basic_http_auth(f):
 @basic_http_auth
 def maillist(request, team_id=None):
     if team_id and team_id.isnumeric():
-        consultants = Consultant.objects.filter(team=team_id)
+        consultants = Consultant.objects.filter(team=team_id, active=True)
         text = generateMailList(consultants)
         return HttpResponse(text, content_type='text/plain')
 
     if team_id == "tl":
-        consultants = Consultant.objects.filter(number__endswith='01')
+        consultants = Consultant.objects.filter(number__endswith='01', active=True)
         text = generateMailList(consultants)
         return HttpResponse(text, content_type='text/plain')
 
 
-    consultants = Consultant.objects.all()
+    consultants = Consultant.objects.filter(active=True)
     text = generateMailList(consultants)
     return HttpResponse(text, content_type='text/plain')
 

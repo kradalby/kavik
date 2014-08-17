@@ -21,7 +21,7 @@ class Consultant(models.Model):
     email               = models.EmailField()
     password            = models.CharField(max_length=100)
     y2                  = models.CharField(max_length=1)
-    active              = models.BooleanField()
+    active              = models.BooleanField(default=False)
 
 
     def __str__(self):
