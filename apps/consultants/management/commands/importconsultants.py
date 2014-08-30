@@ -29,7 +29,6 @@ class Command(BaseCommand):
            
             for c in consultants:
                 c = [x.strip('"') for x in c]
-                # print(c[8])
                 cons = Consultant.objects.update_or_create(longUniqueTWNumber=c[0], defaults={
                     "longUniqueTWNumber" :  c[0], 
                     "ship"               :  c[1],
@@ -50,11 +49,10 @@ class Command(BaseCommand):
                     "y2"                 :  c[16],
                     "active"             :  True,
                 })
-                # cons.save()
                 if c[0] in new:
-                    print("%s - %s %s added" % (cons.number, cons.firstName, cons.lastName))
+                    print("%s - %s %s added" % (c[3], c[6], c[7]))
             
-            # Set removed consultants to unactive
+            # Set removed consultants to inactive
 
             for c in not_active:
                 cons = Consultant.objects.get(longUniqueTWNumber=c)
