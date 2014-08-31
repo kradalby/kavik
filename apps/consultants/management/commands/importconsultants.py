@@ -50,7 +50,7 @@ class Command(BaseCommand):
                     "active"             :  True,
                 })
                 if c[0] in new:
-                    print("%s - %s %s added" % (c[3], c[6], c[7]))
+                    print("+ %s - %s %s added" % (c[3], c[6], c[7]))
             
             # Set removed consultants to inactive
 
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 if cons.active:
                     cons.active = False
                     cons.save()
-                    print("%s - %s %s is now inactive" % (cons.number, cons.firstName, cons.lastName))
+                    print("- %s - %s %s is now inactive" % (cons.number, cons.firstName, cons.lastName))
 
 
         except Exception as e:
