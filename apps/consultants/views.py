@@ -54,38 +54,12 @@ def maillist(request, team_id=None):
 
 @basic_http_auth
 def vcf(request):
-    consultants = Consultant.objects.all()
-    vcf = "" 
-
-    for c in consultants:
-        uid = uuid.uuid5(uuid.NAMESPACE_DNS, c.number).__str__().upper()
-        rev = datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ') 
-        vcf += """BEGIN:VCARD
-VERSION:3.0
-N:%s;%s
-FN:%s %s
-ORG:%s
-TITLE:%s
-TEL;type=HOME;type=VOICE:%s
-TEL;type=CELL;type=VOICE:%s
-item1.ADR;type=HOME;type=pref:;;%s;%s;;%s;%s
-EMAIL;TYPE=PREF,INTERNET:%s
-REV:%s
-UID:%s
-END:VCARD
-""" % ( c.lastName, c.firstName, c.firstName, c.lastName, "Klatrerosen", "TW Konsulent " + c.number, c.phone1, c.phone2, c.address, c.town, c.zipCode, c.country, c.email, rev, uid,)
-    return HttpResponse(vcf, content_type='text/plain; charset=utf-8')
+    pass
 
 
 
 
 def generateMailList(consultants):
-    text = ""
-
-    for consultant in consultants:
-        if consultant.email != " ":
-            text += consultant.email + "\t" + consultant.firstName + " " + consultant.lastName + "\n"
-
-    return text
+    pass
         
 
