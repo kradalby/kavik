@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        consultants = Consultant.objects.all()
+        consultants = Consultant.objects.filter(active=True)
         text = ""
 
         if args[0] == "sympa":
@@ -17,6 +17,11 @@ class Command(BaseCommand):
                     text += consultant.email + "\t" + consultant.firstName + " " + consultant.lastName + "\n"
         elif args[0] == "alias":
             text = "konsulenter: "
+            for consultant in consultants:
+                if consultant.email != " ":
+                    text += consultant.email + " "
+        elif args[0] == "mailpimp":
+            text = "konsulenter@lists.klatrerosen.no:kristine@klatrerosen.no:"
             for consultant in consultants:
                 if consultant.email != " ":
                     text += consultant.email + " "
