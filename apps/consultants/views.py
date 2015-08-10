@@ -24,11 +24,11 @@ def basic_http_auth(f):
             if auth == bytes(a, 'utf-8'):
                 return f(request, *args, **kwargs)
             else:
-                r = HttpResponse("Auth Required", status = 401)
-                r['WWW-Authenticate'] = 'Basic realm="bat"'
+                r = HttpResponse('Auth Required', status = 401)
+                r['WWW-Authenticate'] = 'Basic realm='bat''
                 return r
-        r = HttpResponse("Auth Required", status = 401)
-        r['WWW-Authenticate'] = 'Basic realm="bat"'
+        r = HttpResponse('Auth Required', status = 401)
+        r['WWW-Authenticate'] = 'Basic realm='bat''
         return r
         
     return wrap
@@ -41,7 +41,7 @@ def maillist(request, team_id=None):
         text = generateMailList(consultants)
         return HttpResponse(text, content_type='text/plain')
 
-    if team_id == "tl":
+    if team_id == 'tl':
         consultants = Consultant.objects.filter(number__endswith='01', active=True)
         text = generateMailList(consultants)
         return HttpResponse(text, content_type='text/plain')

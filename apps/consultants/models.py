@@ -25,4 +25,4 @@ class Consultant(models.Model):
 
 
     def __str__(self):
-        return self.number + " " + self.firstName + " " + self.lastName
+        return self.number + ' ' + self.firstName + ' ' + self.lastName

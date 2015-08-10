@@ -4,28 +4,28 @@ from kavik.settings import BASE_DIR
 import os
 
 class Command(BaseCommand):
-    help = "Outputs the teamleader email mail list"
+    help = 'Outputs the teamleader email mail list'
 
 
     def handle(self, *args, **options):
         consultants = Consultant.objects.filter(active=True)
-        text = ""
+        text = ''
 
-        if args[0] == "sympa":
+        if args[0] == 'sympa':
             for consultant in consultants:
-                if consultant.email != " ":
-                    text += consultant.email + "\t" + consultant.firstName + " " + consultant.lastName + "\n"
-        elif args[0] == "alias":
-            text = "konsulenter: "
+                if consultant.email != ' ':
+                    text += consultant.email + '\t' + consultant.firstName + ' ' + consultant.lastName + '\n'
+        elif args[0] == 'alias':
+            text = 'konsulenter: '
             for consultant in consultants:
-                if consultant.email != " ":
-                    text += consultant.email + " "
-        elif args[0] == "mailpimp":
-            text = "konsulenter@lists.klatrerosen.no:kristine@klatrerosen.no:"
+                if consultant.email != ' ':
+                    text += consultant.email + ' '
+        elif args[0] == 'mailpimp':
+            text = 'konsulenter@lists.klatrerosen.no:kristine@klatrerosen.no:'
             for consultant in consultants:
-                if consultant.email != " ":
-                    text += consultant.email + " "
+                if consultant.email != ' ':
+                    text += consultant.email + ' '
         else:
-            text = "Not available"
+            text = 'Not available'
         print(text)
 
