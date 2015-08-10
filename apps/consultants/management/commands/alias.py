@@ -1,11 +1,10 @@
-from django.core.management.base import BaseCommand, CommandError
 from apps.consultants.models import Consultant
-from kavik.settings import BASE_DIR
-import os
+
+from django.core.management.base import BaseCommand
+
 
 class Command(BaseCommand):
     help = 'Outputs the teamleader email mail list'
-
 
     def handle(self, *args, **options):
         consultants = Consultant.objects.filter(active=True)
@@ -27,5 +26,4 @@ class Command(BaseCommand):
                     text += consultant.email + ' '
         else:
             text = 'Not available'
-        print(text)
-
+        print(text)  # NOQA
