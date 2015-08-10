@@ -10,10 +10,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         tl = Consultant.objects.filter(number__endswith='01', active=True)
         string = '#!/bin/bash\n'
-        teams = 'teams=''
+        teams = 'teams="'
         for t in tl:
-            string += 'epost[%s]=%s\n' % (t.number[:2], t.email)
+            string += 'epost[{}]={}\n'.format(t.number[:2], t.email)
             teams += '%s ' % t.number[:2]
         print(string)
-        print(teams + ''')
-        
+        print(teams + '"')
