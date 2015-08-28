@@ -7,14 +7,11 @@ class Command(BaseCommand):
     help = 'Imports tupos forhandlerlist into the database'
 
     def add_arguments(self, parser):
-        parser.add_argument('conslist', required=True)
+        parser.add_argument('conslist')
 
     def handle(self, *args, **options):
-        if len(args) != 1:
-            raise CommandError('This command takes only one argument')
-
         try:
-            file = open(args[0], 'r').read()
+            file = open(options['conslist'], 'r').read()
             consultants = [x.split(',') for x in file.split('\n')]
             consultants.pop(-1)
 
