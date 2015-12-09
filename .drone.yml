@@ -1,21 +1,28 @@
-# image: kradalby/python
-image: kradalby/ci-tox
-
-git:
-  path: github.com/kradalby/kavik
-
-env:
-
-script:
-    - tox
+build:
+    image: kradalby/ci-tox:latest
+    pull: true
+    environment:
+      - DJANGO_SETTINGS_MODULE=init_django.settings.dev
+    commands:
+      - tox
 
 notify:
   email:
+    from: drone@fap.no
+    host: smtp.stud.ntnu.no
+    port: 25
     recipients:
       - kradalby@kradalby.no
 
 deploy:
-  bash:
-    script: 
-        - 'git clone https://github.com/kradalby/plays.git'
-        - 'ansible-playbook -i plays/inventory plays/deploy/kavik.yml'
+  ssh:
+    host: 10.0.1.26
+    user: root
+    port: 22
+    commands:
+      - cd /srv/kavik
+      - git pull
+      - make env
+      - make prod
+      - make migrate
+      - touch /etc/uwsgi/apps-enabled/kavik.ini
