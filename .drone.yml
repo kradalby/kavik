@@ -19,6 +19,8 @@ deploy:
     host: 10.0.1.26
     user: root
     port: 22
+    when:
+        branch: master
     commands:
       - cd /srv/kavik
       - git pull
